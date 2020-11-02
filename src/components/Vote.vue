@@ -2,42 +2,39 @@
 
   
     <v-row class="my-vote-window text-center">
-      <v-col cols="12">
-          <h2>Hello from Vote</h2>
-          <p>I am {{username}}</p>
-
+        <v-col cols="12">
+         
             <v-banner
                 elevation="4"
                 slot="icon"
             >
                 <svg-icon slot ="icon" type="mdi" :path="path" ></svg-icon>
 
-                <h2>Corona safe?</h2>
+                <h2>{{poolResults.question}}</h2>
             </v-banner>
-
-      </v-col>
-    
-    
-      <v-col cols="12">
-            <v-card
-                color="#385F73"
+        </v-col>
+        
+        <v-col class="d-flex justify-space-around">
+            <v-btn 
+                x-large
+                color="success"
                 dark
+                elevation="9"
+                @click="castVote('yes')"
             >
-                <v-card-title class="headline">
-                Unlimited music now
-                </v-card-title>
+                    {{poolResults.questionAnswerYes}}
+            </v-btn>
 
-                <v-card-subtitle>Listen to your favorite artists and albums whenever and wherever, online and offline.</v-card-subtitle>
-
-                <v-card-actions>
-                <v-btn text>
-                    Listen Now
-                </v-btn>
-                </v-card-actions>
-            </v-card>
-            </v-col>  
-    
-
+            <v-btn 
+                x-large
+                color="success"
+                dark
+                elevation="9"
+                @click="castVote('no')"
+            >
+                    {{poolResults.questionAnswerNo}}
+            </v-btn>
+        </v-col>
 
     </v-row>
 
@@ -64,12 +61,21 @@ export default {
         username:{
             type: String,
             required: true
+        },
+        poolResults:{
+            type: Object,
+            required : true
         }
     },
     methods:{
-        favoriteTwoot(id){
-            this.$emit('favourite',id);
+        castVote(yesNo){
+            console.log("Voted:"+yesNo);
+            this.$emit('afterVote', 1);
         }
+    },
+    created: function() {
+    
+    
     },
     data(){
         return {
@@ -89,10 +95,10 @@ export default {
     cursor: pointer;
     transition: all 0.25s ease;
 
-    &:hover{
-        transform: rotate3d(1,1,1,45deg);
-        transform: scale(1.1,1.1);
-    }
+    // &:hover{
+    //     transform: rotate3d(1,1,1,45deg);
+    //     transform: scale(1.1,1.1);
+    // }
 
    
 

@@ -1,35 +1,28 @@
 <template>
 
   <v-container>
+    <v-row>
+        <v-col>
+            <v-radio-group row v-model="mySwitchChartLine" :mandatory="false">
+                <p>Select chart type</p>
+                <v-spacer></v-spacer>
+                <v-radio label="Line chart" value="line"></v-radio>
+                <v-radio label="Pie chart" value="pie"></v-radio>
+            </v-radio-group>
+        </v-col>
+
+    </v-row>
     <v-row class="text-center">
         <v-col cols="12">
-            <h2>Hello from Result window</h2>
-            <p>I am {{username}}</p>
-
-            <v-progress-circular
-            :rotate="360"
-            :size="100"
-            :width="15"
-            :value="value"
-            color="teal"
-            >
-            {{ value }}
-            </v-progress-circular>
-
-
+            <h2>{{poolResults.question}}</h2>
+            <p>There were {{poolResults.numberOfVotes}} votes casted.</p>
+        </v-col>
+        <v-col>
+        <PoolResultLineChart :lineChartValues="poolResults" v-if="mySwitchChartLine==='line'"/>
+        <PoolResultPieChart :lineChartValues="poolResults" v-if="mySwitchChartLine==='pie'"/>
         </v-col>
     </v-row>
-    <v-col>
-        <v-progress-linear
-            v-model="value"
-            height="25"
-        >
-            <strong>{{ Math.ceil(value) }}%</strong>
-        </v-progress-linear>
-    </v-col>
   </v-container>
-
-
 
 </template>
 
@@ -39,22 +32,43 @@
 
 
 <script>
+
+import PoolResultLineChart from './PoolResultLineChart';
+import PoolResultPieChart from './PoolResultPieChart';
+
 export default {
     name:"PoolResult",
+    components: {PoolResultLineChart, PoolResultPieChart},
     props:{
         username:{
             type: String,
             required: true
+        },
+        poolResults:{
+            type: Object,
+            required : true
         }
     },
     methods:{
         favoriteTwoot(id){
             this.$emit('favourite',id);
+        },
+        changeSwitch(){
+            console.log("Switched");
         }
     },
     data(){
         return {
             value:12,
+            mySwitchChartLine: 'line'
+        }
+    },
+    watch: { 
+        mySwitchChartLine: {
+            handler (val, oldVal) {
+                console.log("NEW:"+val+" OLD:"+oldVal);
+            // do your stuff
+            }
         }
     }
 }
@@ -121,6 +135,18 @@ export default {
         }
     }
 
+}
+
+// Setting the switch to fix color - regardless of state
+
+v-radio-group{
+    display : flex;
+    flex-direction: row;
+    margin-left: auto;
+
+    v-radio{
+        margin-left : 10px;
+    }
 }
 
 </style>
