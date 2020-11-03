@@ -98,10 +98,15 @@ export default {
     //     transform: scale(1.1,1.1);
     // }
 
-   
+   .v-btn:hover{
+       transform: scale(1.1,1.1);
+   }
 
 } // end of .twoot-item
 
+h2 {
+  line-height: 1.6;
+}
 
 
 

@@ -14,7 +14,7 @@
           transition="scale-transition"
           width="40"
         />
-        <h2>Vuetify - Birds Challenge</h2>
+        <h2>Birds</h2>
 
       </div>
 

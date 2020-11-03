@@ -3,11 +3,13 @@
   <v-container>
     <v-row>
         <v-col>
-            <v-radio-group row v-model="mySwitchChartLine" :mandatory="false" >
-                <p>Select chart type</p>
+            <v-radio-group  row v-model="mySwitchChartLine" :mandatory="false" >
                 <v-spacer></v-spacer>
-                <v-radio class="my-radio" label="Line chart" value="line"></v-radio>
-                <v-radio class="my-radio" label="Pie chart" value="pie"></v-radio>
+                <p>Select chart type :</p>
+                <div>
+                    <v-radio class="my-radio" label="Line chart" value="line"></v-radio>
+                    <v-radio class="my-radio" label="Pie chart" value="pie"></v-radio>
+                </div>
             </v-radio-group>
         </v-col>
 
@@ -74,15 +76,26 @@ export default {
 
 <style lang="scss" scoped>
 
+//restore the settings am <p> tag 
+p{
+    margin-bottom: initial;
+    margin-right: 20px;
+}
 
 v-radio-group{
     display : flex;
     flex-direction: row;
+    align-items: flex-start;
     margin-left: auto;
-    v-radio{
-        margin-left : 10px;
-    }
+    
+    
 }
+
+    .v-radio{
+        margin-left : 10px;
+        font-size: 0.8rem;
+    }
+
 
 // Configure the animation classes : "change-view" = class name + "-enter-active" or "-leave-active"
 .change-view-line-chart-enter-active{
