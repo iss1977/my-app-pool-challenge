@@ -58,10 +58,6 @@ export default {
     name:"Vote",
     components:{SvgIcon},
     props:{
-        username:{
-            type: String,
-            required: true
-        },
         poolResults:{
             type: Object,
             required : true
@@ -70,7 +66,7 @@ export default {
     methods:{
         castVote(yesNo){
             console.log("Voted:"+yesNo);
-            this.$emit('afterVote', 1);
+            this.$emit('afterVote', yesNo);
         }
     },
     created: function() {

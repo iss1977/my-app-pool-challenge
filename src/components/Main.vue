@@ -1,9 +1,9 @@
 <template>
-  <v-container>
+  <v-container class="mx-auto" fluid style="margin: 0px; padding: 0px; width: 80% ; max-width:800px;">
     <v-row class="text-center">
       <v-col cols="12">
         <v-img
-          :src="require('../assets/logo.svg')"
+          :src="require('../assets/logo.png')"
           class="my-3"
           contain
           height="200"
@@ -17,19 +17,14 @@
       </v-col>
     </v-row>
 
-
-
-    <v-row class="text-center" v-if="currentStatus==='voting'">
-      <v-col class="mb-4">
-        <Vote :poolResults="poolResults" @afterVote="setVoteResult"/>
-      </v-col>
+    <v-row class="text-center" >
+          <v-col class="mb-4">
+            <transition name = "change-view-to-results" mode="out-in" >
+                    <Vote :poolResults="poolResults" @afterVote="setVoteResult" v-if="currentStatus==='voting'"/>
+                    <PoolResult  :poolResults="poolResults" v-if="currentStatus==='show-results'"/>
+            </transition>
+          </v-col>
     </v-row>   
-
-    <v-row class="text-center" v-if="currentStatus!=='voting'">
-      <v-col class="mb-4">
-        <PoolResult  :poolResults="poolResults"/>
-      </v-col>
-    </v-row>
 
   </v-container>
 </template>
@@ -53,10 +48,78 @@ import PoolResult from './PoolResult';
       currentStatus:'voting'
     }),
     methods:{
-      setVoteResult(number){
-        console.log("Vote result is back !"+number);
-        this.currentStatus = "show-results";
+      setVoteResult(yesOrNo){
+        if(typeof(yesOrNo)==='string'){ // it should be a string with 'yes' or 'no'
+          this.poolResults.numberOfVotes ++;
+          if (yesOrNo ==='yes'){
+              this.poolResults.numberOfYes++;
+          }
+          if (yesOrNo ==='no'){
+              this.poolResults.numberOfNo++;
+          }
+          this.currentStatus = "show-results";
+        }
       }
     }
   }
 </script>
+
+
+
+<style lang="scss" scoped>
+
+v-container{
+  max-width: 800px;
+}
+
+// Configure the animation classes : "change-view" = class name + "-enter-active" or "-leave-active"
+
+.change-view-to-results-enter-active{
+    animation: bounce-in 0.5s ;
+}
+
+.change-view-to-results-leave-active{
+    animation: bounce-in 0.5s reverse;
+}
+
+
+@keyframes bounce-in {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.5);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+} // @keyframes bounce-in
+
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}//@keyframes fade-in
+
+PoolResultLineChart{
+
+}
+
+PoolResultPieChart{
+
+}
+
+.view-transition{
+
+}
+
+</style>

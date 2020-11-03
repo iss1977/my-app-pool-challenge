@@ -17,9 +17,11 @@
             <h2>{{poolResults.question}}</h2>
             <p>There were {{poolResults.numberOfVotes}} votes casted.</p>
         </v-col>
-        <v-col>
-        <PoolResultLineChart :lineChartValues="poolResults" v-if="mySwitchChartLine==='line'"/>
-        <PoolResultPieChart :lineChartValues="poolResults" v-if="mySwitchChartLine==='pie'"/>
+        <v-col class = "view-transition">
+            <transition name = "change-view-line-chart" mode="out-in" >
+                <PoolResultLineChart :lineChartValues="poolResults" v-if="mySwitchChartLine==='line'"/>
+                <PoolResultPieChart :lineChartValues="poolResults" v-if="mySwitchChartLine==='pie'"/>
+            </transition>
         </v-col>
     </v-row>
   </v-container>
@@ -40,10 +42,6 @@ export default {
     name:"PoolResult",
     components: {PoolResultLineChart, PoolResultPieChart},
     props:{
-        username:{
-            type: String,
-            required: true
-        },
         poolResults:{
             type: Object,
             required : true
@@ -75,25 +73,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.twoot-item{
-    padding: 20px;
-    background-color: white;
-    border-radius: 5px;
-    border : 1px solid #DFE3E8;
-    box-sizing: border-box;
-    cursor: pointer;
-    transition: all 0.25s ease;
-
-    &:hover{
-        transform: rotate3d(1,1,1,45deg);
-        transform: scale(1.1,1.1);
-    }
-
-    .twoot-item__user{
-        font-weight: bold;
-    }
-
-} // end of .twoot-item
+.view-transition{
+    min-height: 300px;
+}
 
 
 
@@ -137,7 +119,7 @@ export default {
 
 }
 
-// Setting the switch to fix color - regardless of state
+//  radio group styling
 
 v-radio-group{
     display : flex;
@@ -148,5 +130,52 @@ v-radio-group{
         margin-left : 10px;
     }
 }
+
+// Configure the animation classes : "change-view" = class name + "-enter-active" or "-leave-active"
+.change-view-line-chart-enter-active{
+    animation: bounce-in 0.5s ;
+}
+
+.change-view-line-chart-leave-active{
+    animation: bounce-in 0.5s reverse;
+}
+
+.change-view-pie-chart-enter-active{
+    animation: fade-in 0.5s ;
+}
+
+.change-view-pie-chart-leave-active{
+    animation: fade-in 0.5s reverse;
+}
+
+
+
+@keyframes bounce-in {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.5);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+} // @keyframes bounce-in
+
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}//@keyframes fade-in
+
 
 </style>

@@ -2,7 +2,7 @@
     <v-row>
         <v-col>
              <br>
-            <p class="text-left">{{lineChartValues.numberOfYes}} votes</p>
+            <p class="text-left"><strong>{{lineChartValues.questionAnswerYes }} </strong> - {{lineChartValues.numberOfYes}} votes</p>
             <v-progress-linear
                 height="25"
                 :value = "(lineChartValues.numberOfYes / lineChartValues.numberOfVotes*100).toFixed(0)+'%'"
@@ -10,7 +10,7 @@
                 <strong>{{(lineChartValues.numberOfYes / lineChartValues.numberOfVotes*100).toFixed(0) }}%</strong>
             </v-progress-linear>
             <br>
-            <p class="text-left">{{lineChartValues.numberOfYes}} votes</p>
+            <p class="text-left"><strong>{{lineChartValues.questionAnswerNo }} </strong> - {{lineChartValues.numberOfNo}} votes</p>
             <v-progress-linear
                 :value = "(lineChartValues.numberOfNo / lineChartValues.numberOfVotes*100).toFixed(0)+'%'"
                 height="25"
