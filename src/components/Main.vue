@@ -1,5 +1,5 @@
 <template>
-  <v-container class="mx-auto" fluid style="margin: 0px; padding: 0px; width: 80% ; max-width:800px;">
+  <v-container class="mx-auto" fluid style="margin: 0px; padding: 0px; width: 80% ; min-width:300px; max-width:800px;">
     <v-row class="text-center">
       <v-col cols="12">
         <v-img
@@ -11,9 +11,9 @@
       </v-col>
 
       <v-col class="mb-4">
-        <h1 class="display-2 font-weight-bold mb-3">
-          Welcome to My Pool Challenge
-        </h1>
+        <h2 class="display-2 font-weight-bold mb-3">
+          I have a question ...
+        </h2>
       </v-col>
     </v-row>
 
@@ -38,7 +38,7 @@ import PoolResult from './PoolResult';
     components : {Vote, PoolResult},
     data: () => ({
       poolResults:{
-                'question':"Where to the birds in winter fly ?",
+                'question':"Where do the birds go when it's cold?",
                 'numberOfVotes': 1197,
                 'questionAnswerYes': "To Africa",
                 'questionAnswerNo': "To America",
@@ -70,6 +70,7 @@ import PoolResult from './PoolResult';
 
 v-container{
   max-width: 800px;
+  min-width: 400px;
 }
 
 // Configure the animation classes : "change-view" = class name + "-enter-active" or "-leave-active"

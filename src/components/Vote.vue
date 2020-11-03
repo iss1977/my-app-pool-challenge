@@ -14,8 +14,9 @@
             </v-banner>
         </v-col>
         
-        <v-col class="d-flex justify-space-around">
+        <v-col class="d-flex justify-space-around flex-wrap ">
             <v-btn 
+                class ="my-1"
                 x-large
                 color="success"
                 dark
@@ -26,6 +27,7 @@
             </v-btn>
 
             <v-btn 
+                class ="my-1"
                 x-large
                 color="success"
                 dark

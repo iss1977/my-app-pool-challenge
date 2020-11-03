@@ -14,21 +14,14 @@
           transition="scale-transition"
           width="40"
         />
+        <h2>Vuetify - Birds Challenge</h2>
 
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
       </div>
 
       <v-spacer></v-spacer>
 
       <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
+        href="https://birds-challenge.netlify.app/"
         target="_blank"
         text
       >

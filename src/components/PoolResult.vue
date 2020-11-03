@@ -3,11 +3,11 @@
   <v-container>
     <v-row>
         <v-col>
-            <v-radio-group row v-model="mySwitchChartLine" :mandatory="false">
+            <v-radio-group row v-model="mySwitchChartLine" :mandatory="false" >
                 <p>Select chart type</p>
                 <v-spacer></v-spacer>
-                <v-radio label="Line chart" value="line"></v-radio>
-                <v-radio label="Pie chart" value="pie"></v-radio>
+                <v-radio class="my-radio" label="Line chart" value="line"></v-radio>
+                <v-radio class="my-radio" label="Pie chart" value="pie"></v-radio>
             </v-radio-group>
         </v-col>
 
@@ -15,7 +15,7 @@
     <v-row class="text-center">
         <v-col cols="12">
             <h2>{{poolResults.question}}</h2>
-            <p>There were {{poolResults.numberOfVotes}} votes casted.</p>
+            <p>We got {{poolResults.numberOfVotes}} votes.</p>
         </v-col>
         <v-col class = "view-transition">
             <transition name = "change-view-line-chart" mode="out-in" >
@@ -73,59 +73,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.view-transition{
-    min-height: 300px;
-}
 
-
-
-.vote-window__main{
-
-    background-color: aquamarine;
-    padding: 1px;
-
-    .vote-window__question-label{
-        background-color: aliceblue;
-        opacity: 60%;
-        border-radius: 10px;
-        box-shadow: -10px 0px 13px -7px #000000, 10px 0px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0);
-        margin : 20px;
-        border: 1px solid darkgray;
-
-    }
-
-    .vote-window__buttons-area{
-        margin: 10px;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-around;
-        
-
-        button{
-            width : 30%;
-            max-width: 300px;
-            min-width: max-content;
-            padding: 10px;
-            transition: all 0.3s cubic-bezier(.44,.57,.89,-0.21);
-
-            &:hover{
-                transform: scale(1.1,1.3);
-                opacity: 0.7;
-                border : 3px solid blueviolet;
-                padding:7px;
-            }
-        }
-    }
-
-}
-
-//  radio group styling
 
 v-radio-group{
     display : flex;
     flex-direction: row;
     margin-left: auto;
-
     v-radio{
         margin-left : 10px;
     }
